@@ -1,0 +1,78 @@
+### ===========================================
+### BARBER SALON AI AGENT - GET REQUESTS
+### ===========================================
+
+### 1. NEW CUSTOMER - INITIAL GREETING
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Hi%2C%20I%20need%20a%20haircut&from=%2B1234567890&chatId=120363401688020574@g.us&timestamp=2024-06-24T10%3A30%3A00Z&messageType=text
+
+### 2. NEW CUSTOMER - SERVICE INQUIRY
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=What%20services%20do%20you%20offer%3F&from=%2B1234567891&chatId=120363401688020574@g.us&timestamp=2024-06-24T10%3A35%3A00Z&messageType=text
+
+### 3. NEW CUSTOMER - PRICING INQUIRY
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=How%20much%20for%20a%20fade%20cut%20and%20beard%20trim%3F&from=%2B1234567892&chatId=120363401688020576%40g.us&timestamp=2024-06-24T10%3A40%3A00Z&messageType=text
+
+### 4. NEW CUSTOMER - BOOKING REQUEST
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20want%20to%20book%20a%20classic%20cut%20for%20tomorrow%20afternoon&from=%2B1234567893&chatId=120363401688020577%40g.us&timestamp=2024-06-24T11%3A00%3A00Z&messageType=text
+
+### 5. NEW CUSTOMER - MULTIPLE SERVICES
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20need%20a%20haircut%2C%20beard%20trim%2C%20and%20hot%20towel%20shave&from=%2B1234567894&chatId=120363401688020578%40g.us&timestamp=2024-06-24T11%3A15%3A00Z&messageType=text
+
+### 6. RETURNING CUSTOMER - GREETING
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Hello%20again%21&from=%2B1234567890&chatId=120363401688020574@g.us&timestamp=2024-06-24T14%3A00%3A00Z&messageType=text
+
+### 7. CUSTOMER NAME COLLECTION
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=My%20name%20is%20John%20Smith&from=%2B1234567895&chatId=120363401688020579%40g.us&timestamp=2024-06-24T11%3A30%3A00Z&messageType=text
+
+### 8. AVAILABILITY CHECK
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=What%20times%20are%20available%20on%20Friday%3F&from=%2B1234567896&chatId=120363401688020580%40g.us&timestamp=2024-06-24T12%3A00%3A00Z&messageType=text
+
+### 9. SPECIFIC TIME REQUEST
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Can%20I%20book%20for%203%20PM%20on%20Friday%3F&from=%2B1234567897&chatId=120363401688020581%40g.us&timestamp=2024-06-24T12%3A15%3A00Z&messageType=text
+
+### 10. PACKAGE DEAL INQUIRY
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Do%20you%20have%20any%20package%20deals%3F&from=%2B1234567898&chatId=120363401688020582%40g.us&timestamp=2024-06-24T12%3A30%3A00Z&messageType=text
+
+### 11. APPOINTMENT CONFIRMATION
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Yes%2C%20please%20book%20that%20appointment&from=%2B1234567899&chatId=120363401688020583%40g.us&timestamp=2024-06-24T13%3A00%3A00Z&messageType=text
+
+### 12. APPOINTMENT MODIFICATION REQUEST
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20need%20to%20change%20my%20appointment%20time&from=%2B1234567890&chatId=120363401688020574@g.us&timestamp=2024-06-24T15%3A00%3A00Z&messageType=text
+
+### 13. APPOINTMENT CANCELLATION
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20need%20to%20cancel%20my%20appointment&from=%2B1234567891&chatId=120363401688020574@g.us&timestamp=2024-06-24T15%3A30%3A00Z&messageType=text
+
+### 14. CHECK EXISTING APPOINTMENTS
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Do%20I%20have%20any%20upcoming%20appointments%3F&from=%2B1234567892&chatId=120363401688020576%40g.us&timestamp=2024-06-24T16%3A00%3A00Z&messageType=text
+
+### 15. OPERATING HOURS INQUIRY
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=What%20are%20your%20hours%3F&from=%2B1234567900&chatId=120363401688020584%40g.us&timestamp=2024-06-24T16%3A15%3A00Z&messageType=text
+
+### 16. KIDS CUT REQUEST
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20need%20a%20haircut%20for%20my%208-year-old%20son&from=%2B1234567901&chatId=120363401688020585%40g.us&timestamp=2024-06-24T16%3A30%3A00Z&messageType=text
+
+### 17. SENIOR DISCOUNT INQUIRY
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Do%20you%20offer%20senior%20discounts%3F%20I%27m%2067&from=%2B1234567902&chatId=120363401688020586%40g.us&timestamp=2024-06-24T16%3A45%3A00Z&messageType=text
+
+### 18. FATHER & SON SPECIAL
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Can%20I%20book%20appointments%20for%20me%20and%20my%20son%20together%3F&from=%2B1234567903&chatId=120363401688020587%40g.us&timestamp=2024-06-24T17%3A00%3A00Z&messageType=text
+
+### 19. SPECIAL OCCASION BOOKING
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20have%20a%20wedding%20next%20week%2C%20need%20a%20full%20grooming%20session&from=%2B1234567904&chatId=120363401688020588%40g.us&timestamp=2024-06-24T17%3A15%3A00Z&messageType=text
+
+### 20. COMPLEX SERVICE COMBINATION
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=I%20want%20the%20Gentleman%27s%20Package%20-%20cut%2C%20beard%2C%20and%20hot%20towel%20shave&from=%2B1234567905&chatId=120363401688020589%40g.us&timestamp=2024-06-24T17%3A30%3A00Z&messageType=text
+
+### 21. LAST MINUTE BOOKING
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Do%20you%20have%20any%20openings%20today%3F&from=%2B1234567906&chatId=120363401688020590%40g.us&timestamp=2024-06-24T18%3A00%3A00Z&messageType=text
+
+### 22. RESCHEDULING REQUEST
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Can%20we%20move%20my%20Friday%20appointment%20to%20Saturday%3F&from=%2B1234567907&chatId=120363401688020591%40g.us&timestamp=2024-06-24T18%3A15%3A00Z&messageType=text
+
+### 23. SERVICE ADDITION TO EXISTING BOOKING
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=Can%20I%20add%20a%20beard%20trim%20to%20my%20existing%20appointment%3F&from=%2B1234567908&chatId=120363401688020592%40g.us&timestamp=2024-06-24T18%3A30%3A00Z&messageType=text
+
+### 24. WAITLIST REQUEST
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=If%20you%27re%20fully%20booked%2C%20can%20you%20put%20me%20on%20a%20waitlist%3F&from=%2B1234567909&chatId=120363401688020593%40g.us&timestamp=2024-06-24T18%3A45%3A00Z&messageType=text
+
+### 25. GENERAL QUESTIONS & SMALL TALK
+GET http://localhost:5678/webhook-test/barber-salon-booking?message=How%20long%20have%20you%20been%20in%20business%3F&from=%2B1234567910&chatId=120363401688020594%40g.us&timestamp=2024-06-24T19%3A00%3A00Z&messageType=text

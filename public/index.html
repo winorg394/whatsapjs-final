@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #128C7E;
+        }
+        #qrcode-container {
+            margin: 20px 0;
+            min-height: 256px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #qrcode {
+            max-width: 100%;
+        }
+        #status {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .loading {
+            color: #128C7E;
+        }
+        .error {
+            color: #FF0000;
+        }
+        .success {
+            color: #25D366;
+        }
+        button {
+            background-color: #128C7E;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0e6b5c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WhatsApp QR Code</h1>
+        <p>Scan this QR code with your WhatsApp to connect</p>
+        
+        <div id="qrcode-container">
+            <img id="qrcode" src="" alt="QR Code" style="display: none;">
+            <div id="loading">Loading QR code...</div>
+        </div>
+        
+        <div id="status" class="loading">Waiting for QR code...</div>
+        
+        <button id="refresh">Refresh QR Code</button>
+    </div>
+
+    <script>
+        const qrcodeImg = document.getElementById('qrcode');
+        const loadingDiv = document.getElementById('loading');
+        const statusDiv = document.getElementById('status');
+        const refreshBtn = document.getElementById('refresh');
+
+        // Function to fetch and display QR code
+        async function fetchQRCode() {
+            statusDiv.textContent = 'Fetching QR code...';
+            statusDiv.className = 'loading';
+            loadingDiv.style.display = 'block';
+            qrcodeImg.style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/qrcode');
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Convert the QR code data to an image using a QR code library
+                    // For simplicity, we'll use a third-party service
+                    qrcodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(data.qrCode)}&size=256x256`;
+                    qrcodeImg.style.display = 'block';
+                    loadingDiv.style.display = 'none';
+                    statusDiv.textContent = 'QR Code ready to scan!';
+                    statusDiv.className = 'success';
+                } else {
+                    statusDiv.textContent = data.message || 'QR code not available';
+                    statusDiv.className = 'error';
+                    loadingDiv.textContent = 'No QR code available';
+                }
+            } catch (error) {
+                console.error('Error fetching QR code:', error);
+                statusDiv.textContent = 'Error fetching QR code. Server might be offline.';
+                statusDiv.className = 'error';
+                loadingDiv.textContent = 'Error loading QR code';
+            }
+        }
+
+        // Fetch QR code on page load
+        window.addEventListener('load', fetchQRCode);
+
+        // Refresh button event listener
+        refreshBtn.addEventListener('click', fetchQRCode);
+
+        // Poll for status every 10 seconds
+        setInterval(async () => {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                if (data.clientReady) {
+                    statusDiv.textContent = 'WhatsApp client is connected!';
+                    statusDiv.className = 'success';
+                    loadingDiv.textContent = 'Connected';
+                }
+            } catch (error) {
+                console.error('Error checking status:', error);
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/send-message
+
+Content-Type: application/json
+{
+  "chatId": "120363401688020574@g.us", 
+  "message": "Hello, this is a test messag11115896111"
+}
+
