@@ -24,6 +24,8 @@ coverage/
 # Optional: Ignore session or upload folders (if you don’t want them in git)
 uploads/
 session/
+fra/
+franky45/
 
 # Optional: Ignore Docker artifacts
 *.local

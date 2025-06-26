@@ -38,12 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // WhatsApp client setup
 const client = new Client({
     puppeteer: {
+        headless: false,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
         // Uncomment and set the path to Chrome for video/GIF support
         // executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     },
     authStrategy: new LocalAuth({
-        dataPath: 'frankysteve21548787'
+        dataPath: 'franky45'
     })
 });
 
@@ -83,7 +84,7 @@ client.on('message_create', async (message) => {
 
         // Generate current timestamp in ISO format
         const timestamp = new Date().toISOString();
-    
+
         // Prepare query params
         const params = {
             message: message.body,
@@ -92,9 +93,9 @@ client.on('message_create', async (message) => {
             timestamp: timestamp,
             messageType: 'text'
         };
-    
+
         console.log('http://localhost:5678/webhook/barber-salon-booking?message=' + encodeURIComponent(message.body) + '&from=' + encodeURIComponent(message.from) + '&chatId=120363401688020574@g.us' + '&timestamp=' + encodeURIComponent(timestamp) + '&messageType=text');
-    
+
         // Send GET request
         axios.get('http://localhost:5678/webhook/barber-salon-booking?message=' + encodeURIComponent(message.body) + '&from=' + encodeURIComponent(message.from) + '&chatId=120363401688020574@g.us' + '&timestamp=' + encodeURIComponent(timestamp) + '&messageType=text')
             .then(response => {
@@ -104,9 +105,9 @@ client.on('message_create', async (message) => {
             .catch(error => {
                 console.error('Error:', error.message);
             });
-    
+
     }
-    
+
 
     if (message.body === '!ping') {
         const poll = new Poll(
@@ -151,7 +152,7 @@ app.post('/api/send-message', async (req, res) => {
             return res.status(503).json({ success: false, message: 'WhatsApp client not ready' });
         }
 
-        const { chatId, message } = req.body;
+        const { chatId, message } = req.body; 
 
         if (!chatId || !message) {
             return res.status(400).json({ success: false, message: 'chatId and message are required' });
@@ -159,10 +160,17 @@ app.post('/api/send-message', async (req, res) => {
 
         const sentMessage = await client.sendMessage(chatId, message);
 
+        // Wait for a short time to allow ack status to update (optional)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        console.log("sentMessagesentMessagesentMessagesentMessage");
+        console.log(sentMessage);
+        
+
         res.json({
             success: true,
-            message: 'Message sent successfully',
-            messageId: sentMessage.id._serialized
+            message:  'Message sent successfully' ,
+            messageId: sentMessage.id._serialized,
+            
         });
     } catch (error) {
         console.error('Error sending message:', error);
@@ -173,6 +181,7 @@ app.post('/api/send-message', async (req, res) => {
         });
     }
 });
+
 
 // Send media from local file endpoint
 app.post('/api/send-media-from-file', upload.single('file'), async (req, res) => {
